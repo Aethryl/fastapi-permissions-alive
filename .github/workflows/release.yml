@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+    strategy:
+      matrix:
+        environment: [release]
     steps:
       - name: release
         uses: pypa/gh-action-pypi-publish@v1.10.0
