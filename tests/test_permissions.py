@@ -15,7 +15,7 @@ def dummy_resource_callable():
 
 class DummyUser:
     def __init__(self, principals):
-        from fastapi_permissions import Everyone, Authenticated
+        from fastapi_permissions_alive import Everyone, Authenticated
 
         self.principals = [Everyone] + principals
         if principals:
@@ -33,7 +33,7 @@ dummy_user_bob = DummyUser([])
 
 @pytest.fixture
 def acl_fixture():
-    from fastapi_permissions import All, Deny, Allow, Everyone, Authenticated
+    from fastapi_permissions_alive import All, Deny, Allow, Everyone, Authenticated
 
     yield [
         (Allow, "user:john", "view"),
@@ -97,7 +97,7 @@ def test_configure_permissions_wraps_principal_callable(mocker):
 
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import Depends, configure_permissions
+    from fastapi_permissions_alive import Depends, configure_permissions
 
     configure_permissions(dummy_principal_callable)
 
@@ -110,7 +110,7 @@ def test_configure_permissions_returns_correct_signature(mocker):
 
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import (
+    from fastapi_permissions_alive import (
         Depends,
         permission_exception,
         configure_permissions,
@@ -135,7 +135,7 @@ def test_configure_permissions_parameters(mocker):
 
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import configure_permissions
+    from fastapi_permissions_alive import configure_permissions
 
     partial_func = configure_permissions(
         dummy_principal_callable, permission_exception="exception option"
@@ -148,7 +148,7 @@ def test_configure_permissions_parameters(mocker):
 def test_permission_dependency_factory_wraps_callable_resource(mocker):
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import Depends, permission_dependency_factory
+    from fastapi_permissions_alive import Depends, permission_dependency_factory
 
     permission_dependency_factory(
         "view",
@@ -164,7 +164,7 @@ def test_permission_dependency_factory_wraps_callable_resource(mocker):
 def test_permission_dependency_factory_returns_correct_signature(mocker):
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import Depends, permission_dependency_factory
+    from fastapi_permissions_alive import Depends, permission_dependency_factory
 
     permission_func = permission_dependency_factory(
         "view",
@@ -190,7 +190,7 @@ def test_permission_dependency_returns_requested_resource(mocker):
     mocker.patch("fastapi_permissions.has_permission", return_value=True)
     mocker.patch("fastapi_permissions.Depends")
 
-    from fastapi_permissions import Depends, permission_dependency_factory
+    from fastapi_permissions_alive import Depends, permission_dependency_factory
 
     # since the resulting permission function is wrapped in Depends()
     # we need to extract it from the mock
@@ -215,7 +215,7 @@ def test_permission_dependency_raises_exception(mocker):
 
     from fastapi import HTTPException
 
-    from fastapi_permissions import (
+    from fastapi_permissions_alive import (
         Depends,
         permission_exception,
         permission_dependency_factory,
@@ -247,7 +247,7 @@ def test_permission_dependency_raises_exception(mocker):
 )
 def test_has_permission(user, permission, acl_fixture):
     """ tests the has_permission function """
-    from fastapi_permissions import has_permission
+    from fastapi_permissions_alive import has_permission
 
     result = has_permission(user.principals, permission, acl_fixture)
 
@@ -261,7 +261,7 @@ def test_has_permission(user, permission, acl_fixture):
 )
 def test_list_permissions(user, acl_fixture):
     """ tests the list_permissions function """
-    from fastapi_permissions import list_permissions
+    from fastapi_permissions_alive import list_permissions
 
     result = list_permissions(user.principals, acl_fixture)
 

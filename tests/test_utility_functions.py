@@ -16,21 +16,21 @@ class DummyResource:
 @pytest.mark.parametrize("iterable", [[], (), {}, set()])
 def test_normalize_acl_list_provided(iterable):
     """ test for acl provided directly as an iterable """
-    from fastapi_permissions import normalize_acl
+    from fastapi_permissions_alive import normalize_acl
 
     assert normalize_acl(iterable) == iterable
 
 
 def test_normalize_acl_without_acl_attribute():
     """ test for resource without __acl__ attribute """
-    from fastapi_permissions import normalize_acl
+    from fastapi_permissions_alive import normalize_acl
 
     assert normalize_acl("without __acl__") == []
 
 
 def test_normalize_acl_with_acl_attribute():
     """ test for resource with an __acl__ attribute """
-    from fastapi_permissions import normalize_acl
+    from fastapi_permissions_alive import normalize_acl
 
     resource = DummyResource("acl definition")
 
@@ -39,7 +39,7 @@ def test_normalize_acl_with_acl_attribute():
 
 def test_normalize_acl_with_acl_method():
     """ test for resource with an __acl__ attribute """
-    from fastapi_permissions import normalize_acl
+    from fastapi_permissions_alive import normalize_acl
 
     resource = DummyResource(lambda: "acl definition")
 
@@ -48,7 +48,7 @@ def test_normalize_acl_with_acl_method():
 
 def test_normalize_acl_attribute_takes_precedence():
     """ test for resource with an __acl__ attribute that are also iterables """
-    from fastapi_permissions import normalize_acl
+    from fastapi_permissions_alive import normalize_acl
 
     class DummyList(list):
         __acl__ = "acl definition"

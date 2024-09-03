@@ -81,7 +81,7 @@ async def test_app_no_token_subject():
 
     from fastapi import HTTPException
 
-    from fastapi_permissions.example import (
+    from fastapi_permissions_alive.example import (
         get_current_user,
         create_access_token,
     )
@@ -99,7 +99,7 @@ async def test_app_token_with_fake_user():
 
     from fastapi import HTTPException
 
-    from fastapi_permissions.example import (
+    from fastapi_permissions_alive.example import (
         get_current_user,
         create_access_token,
     )
@@ -119,7 +119,7 @@ async def test_app_modified_token():
 
     from fastapi import HTTPException
 
-    from fastapi_permissions.example import (
+    from fastapi_permissions_alive.example import (
         get_current_user,
         create_access_token,
     )
@@ -133,7 +133,7 @@ async def test_app_modified_token():
 @pytest.mark.asyncio
 async def test_app_add_items_would_return_correct_value():
     """ add_items will return the correct value if someone had permission """
-    from fastapi_permissions.example import add_items
+    from fastapi_permissions_alive.example import add_items
 
     result = await add_items([])
     assert result == [{"items": "I can haz cheese?"}]
@@ -141,7 +141,7 @@ async def test_app_add_items_would_return_correct_value():
 
 def test_get_active_principals_for_not_logged_in_user():
     """ return the correct principals for a non logged in user """
-    from fastapi_permissions.example import Everyone, get_active_principals
+    from fastapi_permissions_alive.example import Everyone, get_active_principals
 
     result = get_active_principals(None)
     assert result == [Everyone]

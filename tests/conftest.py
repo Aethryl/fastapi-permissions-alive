@@ -4,7 +4,7 @@ from starlette.testclient import TestClient
 
 @pytest.fixture
 def client():
-    from fastapi_permissions.example import app
+    from fastapi_permissions_alive.example import app
 
     return TestClient(app)
 
