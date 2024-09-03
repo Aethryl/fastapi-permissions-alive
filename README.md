@@ -1,9 +1,27 @@
 Row Level Permissions for FastAPI
 =================================
-
-[![Build Status](https://travis-ci.com/holgi/fastapi-permissions.svg?branch=master)](https://travis-ci.com/holgi/fastapi-permissions)
-
 While trying out the excellent [FastApi][] framework there was one peace missing for me: an easy, declarative way to define permissions of users (and roles/groups) on resources. Since I reall love the way [Pyramid][] handles this, I re-implemented and adapted the system for FastApi (well, you might call it a blatant rip-off).
+
+Forked from [fastapi_permissions](https://github.com/holgi/fastapi-permissions)
+-------------------------------------------------------------------------------
+
+This is a fork of the original fastapi-permissions library. The original library is great, but it had some security issues and was not maintained. This fork aims to fix those issues primarily and add features if I feel like it.
+
+!!! WARNING !!!
+
+I have left the original README.md as is, but I have made some changes to the library.
+With this said, using this is a simple as using the original library, only make the next change in the code:
+
+```python
+from fatapi_permissions import * # old
+from fastapi_permissions_alive import * # new
+```
+
+- Spelling and grammar fixes in the README.md
+- Fixed security issue: Allowed the loading of the resource before authentication and throw a 404 before 401:
+    * this allowed malicious attackers to probe which resources exist in the system
+    * this also allowed attackers to have the FastAPI app execute database transactions, 
+        enabling an easier DOS attack, because this does not use the FastAPI cache.
 
 
 An extremely simple and incomplete example:
