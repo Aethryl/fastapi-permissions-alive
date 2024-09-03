@@ -1,0 +1,15 @@
+name: release
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  publish:
+    runs-on: alpine-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: release
+        uses: pypa/gh-action-pypi-publish@v1.10.0
