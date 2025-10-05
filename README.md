@@ -1,3 +1,8 @@
+Fixed:
+There was a soft security issue in the library which enabled probing object for a 404 response instead of a 403 because said resource is not allowed at all for the user or unauthenticated requests.
+Change the checking order and released as internal package.
+
+
 Row Level Permissions for FastAPI
 =================================
 While trying out the excellent [FastApi][] framework there was one peace missing for me: an easy, declarative way to define permissions of users (and roles/groups) on resources. Since I reall love the way [Pyramid][] handles this, I re-implemented and adapted the system for FastApi (well, you might call it a blatant rip-off).
